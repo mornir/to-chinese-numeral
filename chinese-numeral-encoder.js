@@ -18,19 +18,27 @@ function toChineseNumeral(num) {
     10000: "万",
   }
 
-  const nums = (num / 100)
+  if (num === 10) {
+    return numerals[10]
+  }
+
+  const nums = (num / 1000)
     .toString()
     .split("")
     .filter((n) => n !== ".")
     .reduce((acc, n, idx) => {
       if (idx === 0 && n !== "0") {
-        acc += numerals[parseInt(n)] + "百"
+        acc += numerals[parseInt(n)] + "千"
       }
 
       if (idx === 1 && n !== "0") {
+        acc += numerals[parseInt(n)] + "百"
+      }
+
+      if (idx === 2 && n !== "0") {
         acc += numerals[parseInt(n)] + "十"
       }
-      if (idx === 2) {
+      if (idx === 3) {
         acc += numerals[parseInt(n)]
       }
       return acc
@@ -39,4 +47,4 @@ function toChineseNumeral(num) {
   return nums
 }
 
-console.log(toChineseNumeral(144))
+console.log(toChineseNumeral(1001))
