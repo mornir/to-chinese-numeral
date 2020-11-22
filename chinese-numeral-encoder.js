@@ -22,7 +22,7 @@ function toChineseNumeral(num) {
     return numerals[num]
   }
 
-  const nums = (num % 10000).toString().split("")
+  const nums = (num % 100000).toString().split("")
 
   console.log(nums)
 
@@ -31,7 +31,7 @@ function toChineseNumeral(num) {
     return numerals[nums[0]]
   }
 
-  function dizaines(num1, num2) {
+  function dizaines([num1, num2]) {
     return (
       (num1 !== "1" ? numerals[num1] : "") +
       numerals[10] +
@@ -39,30 +39,39 @@ function toChineseNumeral(num) {
     )
   }
 
-  function centaines(num1, num2, num3) {
-    return numerals[num1] + numerals[100] + dizaines(num2, num3)
+  function centaines([num1, num2, num3]) {
+    return numerals[num1] + numerals[100] + dizaines([num2, num3])
   }
 
-  function milliers(num1, num2, num3, num4) {
-    return numerals[num1] + numerals[1000] + centaines(num2, num3, num4)
+  function milliers([num1, num2, num3, num4]) {
+    return numerals[num1] + numerals[1000] + centaines([num2, num3, num4])
+  }
+
+  function dixmilliers([num1, num2, num3, num4, num5]) {
+    return numerals[num1] + numerals[10000] + milliers([num2, num3, num4, num5])
   }
 
   // dizaines
   if (nums.length === 2) {
-    return dizaines(nums[0], nums[1])
+    return dizaines(nums)
   }
 
   // centaines
   if (nums.length === 3) {
-    return centaines(nums[0], nums[1], nums[2])
+    return centaines(nums)
   }
 
   // milliers
   if (nums.length === 4) {
-    return milliers(nums[0], nums[1], nums[2], nums[3])
+    return milliers(nums)
+  }
+
+  // dix mille
+  if (nums.length === 5) {
+    return dixmilliers(nums)
   }
 
   return nums
 }
 
-console.log(toChineseNumeral(1250))
+console.log(toChineseNumeral(12345))
