@@ -1,4 +1,4 @@
-function toChineseNumeral(num) {
+function toChineseNumeral(num = 10) {
   const numerals = {
     "-": "负",
     ".": "点",
@@ -18,33 +18,38 @@ function toChineseNumeral(num) {
     10000: "万",
   }
 
-  if (num === 10) {
-    return numerals[10]
+  if (num === 10 || num == 0) {
+    return numerals[num]
   }
 
-  const nums = (num / 1000)
-    .toString()
-    .split("")
-    .filter((n) => n !== ".")
-    .reduce((acc, n, idx) => {
-      if (idx === 0 && n !== "0") {
-        acc += numerals[parseInt(n)] + "千"
-      }
+  const nums = (num % 1000).toString().split("")
 
-      if (idx === 1 && n !== "0") {
-        acc += numerals[parseInt(n)] + "百"
-      }
+  console.log(nums)
 
-      if (idx === 2 && n !== "0") {
-        acc += numerals[parseInt(n)] + "十"
-      }
-      if (idx === 3) {
-        acc += numerals[parseInt(n)]
-      }
-      return acc
-    }, "")
+  // unités
+  if (nums.length === 1) {
+    return numerals[nums[0]]
+  }
+
+  // dizaines
+  if (nums.length === 2) {
+    return (
+      (nums[0] !== "1" ? numerals[nums[1]] : "") +
+      numerals[10] +
+      (nums[1] !== "0" ? numerals[nums[1]] : "")
+    )
+  }
+
+  // centaines
+  if (nums.length === 3) {
+    return (
+      numerals[nums[0]] +
+      numerals[100] +
+      (nums[1] !== "0" ? numerals[nums[1]] : "")
+    )
+  }
 
   return nums
 }
 
-console.log(toChineseNumeral(1001))
+console.log(toChineseNumeral(12))
