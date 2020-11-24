@@ -86,3 +86,5 @@ function toChineseNumeral(num) {
 }
 
 console.log(toChineseNumeral(-12))
+
+module.exports = toChineseNumeral
