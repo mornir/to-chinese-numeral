@@ -18,8 +18,15 @@ function toChineseNumeral(num) {
     10000: "万",
   }
 
-  if (num === 10 || num == 0) {
+  let isNeg = false
+
+  if (num === 10) {
     return numerals[num]
+  }
+
+  if (num < 0) {
+    isNeg = true
+    num = num * -1
   }
 
   const nums = (num % 100000).toString().split("")
@@ -39,39 +46,43 @@ function toChineseNumeral(num) {
     )
   }
 
-  function centaines([num1, num2, num3]) {
-    return numerals[num1] + numerals[100] + dizaines([num2, num3])
+  function centaines([num1, ...rest]) {
+    return numerals[num1] + numerals[100] + dizaines(rest)
   }
 
-  function milliers([num1, num2, num3, num4]) {
-    return numerals[num1] + numerals[1000] + centaines([num2, num3, num4])
+  function milliers([num1, ...rest]) {
+    return numerals[num1] + numerals[1000] + centaines(rest)
   }
 
-  function dixmilliers([num1, num2, num3, num4, num5]) {
-    return numerals[num1] + numerals[10000] + milliers([num2, num3, num4, num5])
+  function dixmilliers([num1, ...rest]) {
+    return numerals[num1] + numerals[10000] + milliers(rest)
   }
 
   // dizaines
   if (nums.length === 2) {
-    return dizaines(nums)
+    num = dizaines(nums)
   }
 
   // centaines
   if (nums.length === 3) {
-    return centaines(nums)
+    num = centaines(nums)
   }
 
   // milliers
   if (nums.length === 4) {
-    return milliers(nums)
+    num = milliers(nums)
   }
 
   // dix mille
   if (nums.length === 5) {
-    return dixmilliers(nums)
+    num = dixmilliers(nums)
   }
 
-  return nums
+  if (isNeg) {
+    num += "负"
+  }
+
+  return num
 }
 
-console.log(toChineseNumeral(12345))
+console.log(toChineseNumeral(-12))
