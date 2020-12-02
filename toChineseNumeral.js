@@ -18,8 +18,6 @@ function toChineseNumeral(num) {
     10000: "万",
   }
 
-  let isNeg = false
-
   if (num === 10) {
     return numerals[num]
   }
@@ -27,6 +25,8 @@ function toChineseNumeral(num) {
   if (num === 100 || num === 1000 || num === 10000) {
     return numerals[1] + numerals[num]
   }
+
+  let isNeg = false
 
   if (num < 0) {
     isNeg = true
@@ -49,8 +49,34 @@ function toChineseNumeral(num) {
   function generateNumber(nums) {
     // unités
 
-    if (nums.length === 1) {
-      num = numerals[nums[0]]
+    function tenX([num1, ...rest]) {
+      let tenth = 0
+
+      if (rest.length === 0) {
+        return numerals[nums[0]]
+      }
+
+      if (rest.length === 1) {
+        console.log(rest)
+        return dizaines([num1, ...rest])
+      }
+
+      // centaines
+      if (rest.length === 2) {
+        tenth = 100
+      }
+
+      // milliers
+      if (rest.length === 3) {
+        tenth = 1000
+      }
+
+      // dix mille
+      if (rest.length === 4) {
+        tenth = 10000
+      }
+
+      return numerals[num1] + numerals[tenth] + tenX(rest)
     }
 
     function dizaines([num1, num2]) {
@@ -61,47 +87,23 @@ function toChineseNumeral(num) {
       )
     }
 
-    function centaines([num1, ...rest]) {
-      return numerals[num1] + numerals[100] + dizaines(rest)
-    }
-
-    function milliers([num1, ...rest]) {
-      return numerals[num1] + numerals[1000] + centaines(rest)
-    }
-
-    function dixmilliers([num1, ...rest]) {
-      return numerals[num1] + numerals[10000] + milliers(rest)
-    }
-
     // dizaines
     if (nums.length === 2) {
       num = dizaines(nums)
-    }
-
-    // centaines
-    if (nums.length === 3) {
-      num = centaines(nums)
-    }
-
-    // milliers
-    if (nums.length === 4) {
-      num = milliers(nums)
-    }
-
-    // dix mille
-    if (nums.length === 5) {
-      num = dixmilliers(nums)
+    } else {
+      num = tenX(nums)
     }
 
     if (isNeg) {
-      console.log(num)
-      num = "负" + num
+      num = numerals["-"] + num
     }
+    /* 
+    const regexp = /[1-9](0+)[1-9]/g
+    num = num.replace(regexp, numerals[0]) */
 
     return num
   }
 }
-
-console.log(toChineseNumeral(110))
+// 一万零六
 
 module.exports = toChineseNumeral
