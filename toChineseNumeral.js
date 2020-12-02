@@ -18,10 +18,6 @@ function toChineseNumeral(num) {
     10000: "万",
   }
 
-  if (num === 10) {
-    return numerals[num]
-  }
-
   if (num === 100 || num === 1000 || num === 10000) {
     return numerals[1] + numerals[num]
   }
@@ -109,7 +105,7 @@ function toChineseNumeral(num) {
     return num
   }
 }
-// 一万零三百零六点零零五
-console.log(toChineseNumeral(10306.005))
+
+console.log(toChineseNumeral(1000))
 
 module.exports = toChineseNumeral
