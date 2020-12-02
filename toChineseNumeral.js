@@ -37,18 +37,22 @@ function toChineseNumeral(num) {
 
   const numsString = (num % 100000).toString()
 
+  const regexp = /零+/g
+
   if (numsString.includes(".")) {
     nums = numsString.split(".").map((str) => str.split(""))
-    return generateNumber(nums[0]) + numerals["."] + generateNumber(nums[1])
+    return (
+      generateNumber(nums[0]).replace(regexp, numerals[0]) +
+      numerals["."] +
+      generateNumber(nums[1])
+    )
   } else {
     nums = numsString.split("")
-    console.log(nums)
-    return generateNumber(nums)
+
+    return generateNumber(nums).replace(regexp, numerals[0])
   }
 
   function generateNumber(nums) {
-    // unités
-
     function tenX([num1, ...rest]) {
       let tenth = 0
 
@@ -57,8 +61,11 @@ function toChineseNumeral(num) {
       }
 
       if (rest.length === 1) {
-        console.log(rest)
         return dizaines([num1, ...rest])
+      }
+
+      if (num1 === "0") {
+        return numerals[0] + tenX(rest)
       }
 
       // centaines
@@ -80,30 +87,29 @@ function toChineseNumeral(num) {
     }
 
     function dizaines([num1, num2]) {
-      return (
-        (num > 20 ? numerals[num1] : "") +
-        numerals[10] +
-        (num2 !== "0" ? numerals[num2] : "")
-      )
+      let position1 = ""
+      if (num1 === "0") {
+        position1 = "零"
+      } else if (num1 !== "1" || num > 20) {
+        position1 = numerals[num1]
+      }
+
+      let position2 = num1 !== "0" ? numerals[10] : ""
+
+      let position3 = num2 !== "0" ? numerals[num2] : ""
+
+      return position1 + position2 + position3
     }
 
-    // dizaines
-    if (nums.length === 2) {
-      num = dizaines(nums)
-    } else {
-      num = tenX(nums)
-    }
+    num = tenX(nums)
 
     if (isNeg) {
       num = numerals["-"] + num
     }
-    /* 
-    const regexp = /[1-9](0+)[1-9]/g
-    num = num.replace(regexp, numerals[0]) */
-
     return num
   }
 }
-// 一万零六
+// 一万零三百零六点零零五
+console.log(toChineseNumeral(10306.005))
 
 module.exports = toChineseNumeral
