@@ -6,9 +6,15 @@ describe("Chinese Numerals", function () {
   })
   test("Negative numbers", () => {
     expect(toChineseNumeral(-5)).toBe("负五")
+    expect(toChineseNumeral(-0.25)).toBe("负零点二五")
+    expect(toChineseNumeral(-100)).toBe("负一百")
   })
   test("Fractional numbers", () => {
     expect(toChineseNumeral(0.5)).toBe("零点五")
+    expect(toChineseNumeral(0.25)).toBe("零点二五")
+    expect(toChineseNumeral(0.125)).toBe("零点一二五")
+    expect(toChineseNumeral(0.0625)).toBe("零点零六二五")
+    expect(toChineseNumeral(0.03125)).toBe("零点零三一二五")
   })
   test("Special Cases", () => {
     expect(toChineseNumeral(10)).toBe("十")
