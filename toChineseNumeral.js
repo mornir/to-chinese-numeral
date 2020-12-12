@@ -37,68 +37,36 @@ function toChineseNumeral(num) {
   }
 
   function generateNumber(nums) {
-    function handleZeroes(chineseNumeral) {
+    function handleEdgecases(chineseNumeral) {
       if (chineseNumeral === "零") {
         return "零"
       }
 
       const mergeMultipleZeroes = /零+/g
       const removeTrailingZero = /零$/g
+      const removeLeadingTenth = /^一十/g
 
       return chineseNumeral
         .replace(mergeMultipleZeroes, "零")
         .replace(removeTrailingZero, "")
-    }
-
-    function dizaines([num1, num2]) {
-      let position1 = ""
-      if (num1 === "0") {
-        position1 = "零"
-      } else if (num1 !== "1" || num > 20) {
-        position1 = numerals[num1]
-      }
-
-      let position2 = num1 !== "0" ? numerals[10] : ""
-
-      let position3 = num2 !== "0" ? numerals[num2] : ""
-
-      return position1 + position2 + position3
+        .replace(removeLeadingTenth, "十")
     }
 
     function tenX([num1, ...rest]) {
-      let tenth = 0
-
       if (rest.length === 0) {
-        return numerals[nums[0]]
-      }
-
-      if (rest.length === 1) {
-        return dizaines([num1, ...rest])
+        return numerals[num1]
       }
 
       if (num1 === "0") {
         return numerals[0] + tenX(rest)
       }
 
-      // centaines
-      if (rest.length === 2) {
-        tenth = 100
-      }
-
-      // milliers
-      if (rest.length === 3) {
-        tenth = 1000
-      }
-
-      // dix mille
-      if (rest.length === 4) {
-        tenth = 10000
-      }
+      const tenth = Math.pow(10, rest.length)
 
       return numerals[num1] + numerals[tenth] + tenX(rest)
     }
 
-    num = handleZeroes(tenX(nums))
+    num = handleEdgecases(tenX(nums))
 
     if (isNeg) {
       num = numerals["-"] + num
