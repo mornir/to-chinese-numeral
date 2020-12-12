@@ -2,6 +2,7 @@ const toChineseNumeral = require("../src/toChineseNumeral")
 
 describe("Chinese Numerals", function () {
   test("Whole numbers", () => {
+    expect(toChineseNumeral(0)).toBe("零")
     expect(toChineseNumeral(9)).toBe("九")
   })
   test("Negative numbers", () => {
