@@ -53,8 +53,6 @@ function toChineseNumeral(num) {
     }
 
     function tenX([num1, ...rest]) {
-      let tenth = 0
-
       if (rest.length === 0) {
         return numerals[num1]
       }
@@ -63,25 +61,7 @@ function toChineseNumeral(num) {
         return numerals[0] + tenX(rest)
       }
 
-      // dizaines
-      if (rest.length === 1) {
-        tenth = 10
-      }
-
-      // centaines
-      if (rest.length === 2) {
-        tenth = 100
-      }
-
-      // milliers
-      if (rest.length === 3) {
-        tenth = 1000
-      }
-
-      // dix mille
-      if (rest.length === 4) {
-        tenth = 10000
-      }
+      const tenth = Math.pow(10, rest.length)
 
       return numerals[num1] + numerals[tenth] + tenX(rest)
     }
