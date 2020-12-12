@@ -69,7 +69,7 @@ function toChineseNumeral(num) {
       let tenth = 0
 
       if (rest.length === 0) {
-        return numerals[nums[0]]
+        return numerals[num1]
       }
 
       if (rest.length === 1) {
@@ -110,5 +110,7 @@ function toChineseNumeral(num) {
     return decimals.map((number) => numerals[number]).join("")
   }
 }
+
+console.log(toChineseNumeral(52))
 
 module.exports = toChineseNumeral
