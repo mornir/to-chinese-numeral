@@ -72,12 +72,12 @@ function toChineseNumeral(num) {
         return numerals[num1]
       }
 
-      if (rest.length === 1) {
-        return dizaines([num1, ...rest])
-      }
-
       if (num1 === "0") {
         return numerals[0] + tenX(rest)
+      }
+
+      if (rest.length === 1) {
+        return dizaines([num1, ...rest])
       }
 
       // centaines
@@ -111,6 +111,6 @@ function toChineseNumeral(num) {
   }
 }
 
-console.log(toChineseNumeral(52))
+//console.log(toChineseNumeral(1000))
 
 module.exports = toChineseNumeral
