@@ -18,16 +18,6 @@ function toChineseNumeral(num: number) {
     10000: "万",
   }
 
-  let isNeg = false
-
-  if (num < 0) {
-    isNeg = true
-    num = num * -1
-  }
-
-  let nums = []
-  const numsString = (num % 100000).toString()
-
   function generateDecimals(decimals: string[]) {
     return decimals.map((number) => numerals[number]).join("")
   }
@@ -69,6 +59,16 @@ function toChineseNumeral(num: number) {
     }
     return chineseNumeral
   }
+
+  let isNeg = false
+
+  if (num < 0) {
+    isNeg = true
+    num = num * -1
+  }
+
+  let nums: string[] | string[][]
+  const numsString = (num % 100000).toString()
 
   if (numsString.includes(".")) {
     nums = numsString.split(".").map((str) => str.split(""))

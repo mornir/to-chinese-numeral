@@ -18,13 +18,6 @@ function toChineseNumeral(num) {
         1000: "千",
         10000: "万",
     };
-    let isNeg = false;
-    if (num < 0) {
-        isNeg = true;
-        num = num * -1;
-    }
-    let nums = [];
-    const numsString = (num % 100000).toString();
     function generateDecimals(decimals) {
         return decimals.map((number) => numerals[number]).join("");
     }
@@ -57,6 +50,13 @@ function toChineseNumeral(num) {
         }
         return chineseNumeral;
     }
+    let isNeg = false;
+    if (num < 0) {
+        isNeg = true;
+        num = num * -1;
+    }
+    let nums;
+    const numsString = (num % 100000).toString();
     if (numsString.includes(".")) {
         nums = numsString.split(".").map((str) => str.split(""));
         return generateNumber(nums[0]) + numerals["."] + generateDecimals(nums[1]);
