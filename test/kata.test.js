@@ -1,4 +1,4 @@
-const toChineseNumeral = require("../src/toChineseNumeral")
+const toChineseNumeral = require("../dist/toChineseNumeral")
 
 describe("Chinese Numerals", function () {
   test("Whole numbers", () => {
