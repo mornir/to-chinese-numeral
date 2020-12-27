@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "test": "jest",
+    "test": "tsc && jest",
     "build": "tsc"
   },
   "devDependencies": {
