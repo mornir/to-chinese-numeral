@@ -1,4 +1,12 @@
 function toChineseNumeral(num: number) {
+  if (typeof num !== "number") {
+    throw new TypeError("Not a number")
+  }
+
+  if (num < -99999.999 || num > 99999.999) {
+    throw new RangeError("Number must be between -99999 and 99999.")
+  }
+
   const numerals = {
     "-": "负",
     ".": "点",
