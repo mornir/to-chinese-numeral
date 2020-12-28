@@ -26,4 +26,17 @@ describe("Chinese Numerals", function () {
     expect(toChineseNumeral(10006)).toBe("一万零六")
     expect(toChineseNumeral(10306.005)).toBe("一万零三百零六点零零五")
   })
+  test("Bad inputs", () => {
+    expect(() => {
+      toChineseNumeral("ddd")
+    }).toThrow(TypeError)
+
+    expect(() => {
+      toChineseNumeral("125")
+    }).toThrow(TypeError)
+
+    expect(() => {
+      toChineseNumeral(56896325)
+    }).toThrow(RangeError)
+  })
 })
