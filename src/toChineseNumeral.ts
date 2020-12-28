@@ -26,8 +26,11 @@ function toChineseNumeral(num: number) {
     10000: "万",
   }
 
-  function generateDecimals(decimals: string[]) {
-    return decimals.map((number) => numerals[number]).join("")
+  type Digit = "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9"
+  type Tenth = 10 | 100 | 1000 | 10000
+
+  function generateDecimals(decimals: Digit[]) {
+    return decimals.map((number: Digit) => numerals[number]).join("")
   }
 
   function handleEdgecases(chineseNumeral: string) {
@@ -45,7 +48,7 @@ function toChineseNumeral(num: number) {
       .replace(removeLeadingTenth, "十")
   }
 
-  function tenX([num1, ...rest]: string[]): string {
+  function tenX([num1, ...rest]: Digit[]): string {
     if (rest.length === 0) {
       return numerals[num1]
     }
@@ -54,12 +57,12 @@ function toChineseNumeral(num: number) {
       return numerals[0] + tenX(rest)
     }
 
-    const tenth = Math.pow(10, rest.length)
+    const tenth = Math.pow(10, rest.length) as Tenth
 
     return numerals[num1] + numerals[tenth] + tenX(rest)
   }
 
-  function generateNumber(nums: string[]) {
+  function generateNumber(nums: Digit[]) {
     let chineseNumeral = handleEdgecases(tenX(nums))
 
     if (isNeg) {
@@ -75,16 +78,21 @@ function toChineseNumeral(num: number) {
     num = num * -1
   }
 
-  let nums: string[] | string[][]
   const numsString = (num % 100000).toString()
 
   if (numsString.includes(".")) {
-    nums = numsString.split(".").map((str) => str.split(""))
+    const nums = numsString.split(".").map((str) => str.split("")) as Digit[][]
     return generateNumber(nums[0]) + numerals["."] + generateDecimals(nums[1])
   } else {
-    nums = numsString.split("")
+    const nums = numsString.split("") as Digit[]
     return generateNumber(nums)
   }
 }
+
+/* try {
+  console.log(toChineseNumeral(55555555555))
+} catch (error) {
+  console.error(error)
+} */
 
 module.exports = toChineseNumeral
