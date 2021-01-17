@@ -2,11 +2,8 @@
   "name": "to-chinese-numerals",
   "version": "1.0.0",
   "license": "MIT",
-  "main": "src/index.js",
+  "main": "dist/index.js",
   "author": "Jérôme Pott",
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/@mornir"
-  },
   "scripts": {
     "test": "tsc && jest",
     "build": "tsc"
