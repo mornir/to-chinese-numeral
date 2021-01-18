@@ -89,10 +89,4 @@ function toChineseNumeral(num: number) {
   }
 }
 
-/* try {
-  console.log(toChineseNumeral(55555555555))
-} catch (error) {
-  console.error(error)
-} */
-
 module.exports = toChineseNumeral
