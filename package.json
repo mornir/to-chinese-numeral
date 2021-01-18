@@ -1,9 +1,11 @@
 {
-  "name": "to-chinese-numerals",
+  "name": "to-chinese-numeral",
   "version": "1.0.0",
   "license": "MIT",
+  "description": "A function that takes a Number as its argument and returns a Chinese numeral string.",
   "main": "dist/index.js",
   "author": "Jérôme Pott",
+  "type": "module",
   "scripts": {
     "test": "tsc && jest",
     "build": "tsc"
