@@ -1,14 +1,14 @@
-# to-chinese-numerals
+# to-chinese-numeral
 
 > A function that takes a Number as its argument and returns a Chinese numeral string.
 
 ## Install
 
 **npm**  
-`npm install to-chinese-numerals`
+`npm install to-chinese-numeral`
 
 **yarn**  
-`yarn add to-chinese-numerals`
+`yarn add to-chinese-numeral`
 
 ## Usage
 
