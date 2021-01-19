@@ -17,7 +17,7 @@ import toChineseNumeral from "to-chinese-numeral"
 
 try {
   const num = toChineseNumeral(156)
-  // num =
+  // num = 一百五十六
 } catch (error) {
   console.error(error.message)
 }
