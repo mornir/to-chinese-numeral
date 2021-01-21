@@ -1,6 +1,6 @@
 {
   "name": "to-chinese-numeral",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "license": "MIT",
   "description": "A function that takes a Number as its argument and returns a Chinese numeral string.",
   "main": "dist/index.js",
