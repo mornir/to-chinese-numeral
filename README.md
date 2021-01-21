@@ -1,3 +1,5 @@
+![Jest Tests](https://github.com/mornir/to-chinese-numeral/workflows/Jest%20Tests/badge.svg?branch=master) [![NPM](https://nodei.co/npm/to-chinese-numeral.png?mini=true)](https://npmjs.org/package/to-chinese-numeral)
+
 # to-chinese-numeral
 
 > A function that takes a Number as its argument and returns a Chinese numeral string.
@@ -31,4 +33,4 @@ The input argument has to be in the range [-99999.999, 99999.999], otherwise a `
 
 ## Credits
 
-This package was inspired by a [challenge](https://www.codewars.com/kata/52608f5345d4a19bed000b31/train/javascript) on [codewars.com](https://www.codewars.com/)
+This package was inspired by a [challenge](https://www.codewars.com/kata/52608f5345d4a19bed000b31/train/javascript) on [codewars.com](https://www.codewars.com/).
