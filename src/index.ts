@@ -1,5 +1,5 @@
 function toChineseNumeral(num: number) {
-  if (typeof num !== "number") {
+  if (typeof num !== "number" || Number.isNaN(num)) {
     throw new TypeError("Not a number")
   }
 
