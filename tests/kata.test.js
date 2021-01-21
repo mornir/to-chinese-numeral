@@ -36,6 +36,14 @@ describe("Chinese Numerals", function () {
     }).toThrow(TypeError)
 
     expect(() => {
+      toChineseNumeral(NaN)
+    }).toThrow(TypeError)
+
+    expect(() => {
+      toChineseNumeral("")
+    }).toThrow(TypeError)
+
+    expect(() => {
       toChineseNumeral(56896325)
     }).toThrow(RangeError)
   })
