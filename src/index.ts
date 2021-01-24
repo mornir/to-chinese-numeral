@@ -89,4 +89,4 @@ function toChineseNumeral(num: number) {
   }
 }
 
-module.exports = toChineseNumeral
+export default toChineseNumeral

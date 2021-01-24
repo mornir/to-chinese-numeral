@@ -1,4 +1,4 @@
-const toChineseNumeral = require("../dist/index.js")
+import toChineseNumeral from "../dist/index.js"
 
 describe("Chinese Numerals", function () {
   test("Whole numbers", () => {
