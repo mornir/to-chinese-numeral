@@ -1,4 +1,4 @@
-![Jest Tests](https://github.com/mornir/to-chinese-numeral/workflows/Jest%20Tests/badge.svg?branch=master) [![NPM](https://nodei.co/npm/to-chinese-numeral.png?mini=true)](https://npmjs.org/package/to-chinese-numeral)
+[![Jest Tests](https://github.com/mornir/to-chinese-numeral/workflows/Jest%20Tests/badge.svg?branch=master)](https://github.com/mornir/to-chinese-numeral/actions?query=workflow%3A%22Jest+Tests%22) [![NPM](https://nodei.co/npm/to-chinese-numeral.png?mini=true)](https://npmjs.org/package/to-chinese-numeral)
 
 # to-chinese-numeral
 
